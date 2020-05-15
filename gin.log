@@ -2,6 +2,8 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] POST   /videos                   --> main.main.func1 (3 handlers)
-[GIN-debug] GET    /videos                   --> main.main.func2 (3 handlers)
+[GIN-debug] POST   /videos                   --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /videos                   --> main.main.func2 (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8000
+::1 POST  16 May 20 00:11 CST - Latency: 6.152269ms - Path: /videos 
+::1 GET  16 May 20 00:11 CST - Latency: 878.54µs - Path: /videos 
