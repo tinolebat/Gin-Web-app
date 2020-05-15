@@ -8,6 +8,7 @@ import (
 	"github.com/tinolebat/golang/controller"
 	middleware "github.com/tinolebat/golang/custom-middleware"
 	"github.com/tinolebat/golang/service"
+	gindump "github.com/tpkeeper/gin-dump"
 )
 
 var (
@@ -26,7 +27,7 @@ func main() {
 	OutputLogFile()
 
 	server := gin.New()
-	server.Use(gin.Recovery(), middleware.Logger())
+	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth(), gindump.Dump())
 
 	server.POST("/videos", func(c *gin.Context) {
 		c.JSON(200, videoController.Save(c))
