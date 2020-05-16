@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/tinolebat/golang/entity"
 	"github.com/tinolebat/golang/service"
@@ -8,7 +10,7 @@ import (
 
 type VideoController interface {
 	FindAll() []entity.Video
-	Save(ctxt *gin.Context) entity.Video
+	Save(ctxt *gin.Context) error
 }
 
 type Controller struct {
@@ -24,10 +26,19 @@ func New(service service.VideoService) VideoController {
 func (c *Controller) FindAll() []entity.Video {
 	return c.service.FindAll()
 }
-func (c *Controller) Save(ctxt *gin.Context) entity.Video {
+func (c *Controller) Save(ctxt *gin.Context) error {
 	var video entity.Video
-	ctxt.ShouldBindJSON(&video)
-	// ctxt.BindJSON(&video)
+	err := ctxt.ShouldBindJSON(&video)
+	if err != nil {
+		return err
+	}
+
 	c.service.Save(video)
-	return video
+	return nil
+}
+
+func Handle(err error) {
+	if err != nil {
+		fmt.Println(err)
+	}
 }
